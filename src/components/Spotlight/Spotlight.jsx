@@ -1,7 +1,7 @@
 import React from 'react';
 import './Spotlight.css';
 
-const IMG = 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=80';
+const IMG = 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1200&q=80';
 
 const articles = [
   { id: 1,  title: "India's Varaha bags $20M to scale carbon removal from the Global South",         category: 'News',     date: 'Feb 2026', active: false },
@@ -26,9 +26,9 @@ const articles = [
   { id: 20, title: 'Regenerative agriculture: the investment thesis taking root in India',          category: 'Articles', date: 'Aug 2023', active: false },
 ];
 
-// Grid: 3 cols × 150px, gap 10px → total 470px
-const G = 150;
-const GAP = 10;
+// Grid: 3 cols × 195px, gap 12px → total 609px
+const G = 195;
+const GAP = 12;
 
 const tiles = [
   { id: 't1', col: '1',     row: '1', x: 0,             y: 0,             radius: '50%' },
@@ -40,7 +40,7 @@ const tiles = [
   { id: 't7', col: '3',     row: '3', x: (G + GAP) * 2, y: (G + GAP) * 2, radius: '0 70px 70px 70px' },
 ];
 
-const GRID_SIZE = G * 3 + GAP * 2; // 470px
+const GRID_SIZE = G * 3 + GAP * 2; // 609px
 
 function ArticleIcon() {
   return (
@@ -85,7 +85,7 @@ export default function Spotlight() {
 
         <div className="sp-articles">
           {articles.map(a => (
-            <a key={a.id} href="#" className={`sp-article${a.active ? ' sp-article--active' : ''}`}>
+            <a key={a.id} href="#" className="sp-article">
               <div className="sp-article-body">
                 <p className="sp-article-title">{a.title}</p>
                 <div className="sp-article-meta">
@@ -95,7 +95,7 @@ export default function Spotlight() {
                   <span className="sp-meta-date">{a.date}</span>
                 </div>
               </div>
-              <span className="sp-article-arrow">→</span>
+              <span className="sp-article-arrow" />
             </a>
           ))}
         </div>
