@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "WebFetch(domain:omnivore.vc)",
+      "Bash(timeout 10 npm run dev)",
+      "Bash(npm run:*)"
+    ]
+  }
+}

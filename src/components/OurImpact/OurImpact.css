@@ -1,0 +1,167 @@
+/* OurImpact.css */
+
+.our-impact {
+  position: relative;
+  min-height: 520px;
+  background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0d3d2c; /* fallback if image fails */
+  padding: 60px 80px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Dark overlay on top of image */
+.our-impact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(8, 35, 22, 0.68);
+  z-index: 1;
+}
+
+/* All direct children sit above the overlay */
+.our-impact > *:not(.oi-bg-video-wrap) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Top Row ── */
+.oi-impact-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.oi-impact-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.oi-impact-view-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.oi-impact-view-more:hover {
+  opacity: 0.75;
+}
+
+.oi-impact-view-more .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.oi-impact-view-more:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ── Stats List ── */
+.oi-impact-stats {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 0;
+}
+
+.oi-impact-stat {
+  padding: 20px 0;
+}
+
+.oi-impact-stat + .oi-impact-stat {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.oi-impact-stat-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1;
+}
+
+.oi-impact-stat-number {
+  font-size: 72px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.oi-impact-stat-unit {
+  font-size: 28px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1;
+}
+
+.oi-impact-stat-label {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 8px 0 0 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .our-impact {
+    padding: 50px 40px;
+  }
+
+  .oi-impact-title {
+    font-size: 40px;
+  }
+
+  .oi-impact-stat-number {
+    font-size: 60px;
+  }
+
+  .oi-impact-stat-unit {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .our-impact {
+    padding: 40px 20px;
+    min-height: unset;
+  }
+
+  .oi-impact-title {
+    font-size: 32px;
+  }
+
+  .oi-impact-stat-number {
+    font-size: 48px;
+  }
+
+  .oi-impact-stat-unit {
+    font-size: 20px;
+  }
+
+  .oi-impact-stat-label {
+    font-size: 14px;
+  }
+
+  .oi-impact-stats {
+    max-width: 100%;
+  }
+}
