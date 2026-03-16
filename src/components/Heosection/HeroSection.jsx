@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './HeroSection.css'
+import bharatImg from '../../assets/Bharat_9318456b84.svg'
 
 const navLinks = ['Investments', 'Team', 'Impact', 'Spotlight', 'Jobs']
 
@@ -119,7 +120,7 @@ export default function HeroSection() {
             Supporting <span className="orange">visionary</span><br />
             <span className="orange">founders</span> creating impact<br />
             at scale across<br />
-            <span className="orange-italic">bharat</span>
+            <img src={bharatImg} alt="bharat" className="hero-bharat-img" />
           </h1>
 
           <a href="#" className="hero-pitch-btn">

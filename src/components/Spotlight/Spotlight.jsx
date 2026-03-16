@@ -1,6 +1,49 @@
 import './Spotlight.css';
+import spotlightImg from '../../assets/spotlight_mobile_5b96b98c57.png';
 
-const IMG = 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80';
+/* ── Tile grid config (mirrors HeroSection approach) ── */
+const C = 195   // cell size
+const G = 12    // gap
+const SIZE = C * 3 + G * 2  // 609 — viewBox dimension
+
+const POSITIONS = {
+  t1: { x: 0,       y: 0,       w: C,     h: C },
+  t2: { x: C+G,     y: 0,       w: C*2+G, h: C },
+  t3: { x: 0,       y: C+G,     w: C,     h: C },
+  t4: { x: C+G,     y: C+G,     w: C,     h: C },
+  t5: { x: C*2+G*2, y: C+G,     w: C,     h: C },
+  t6: { x: 0,       y: C*2+G*2, w: C,     h: C },
+  t7: { x: C+G,     y: C*2+G*2, w: C*2+G, h: C },
+}
+
+// r: [top-left, top-right, bottom-right, bottom-left] — mirrors CSS .morph border-radius
+const MORPH = {
+  t1: [0,  97, 97, 97],
+  t2: [80, 80,  0, 80],
+  t3: [97, 97,  0, 97],
+  t4: [97, 97, 97,  0],
+  t5: [97,  0, 97, 97],
+  t6: [97,  0, 97, 97],
+  t7: [ 0, 80, 80, 80],
+}
+
+const TILES = Object.keys(POSITIONS).map(id => ({ ...POSITIONS[id], r: MORPH[id] }))
+
+function tilePath(x, y, w, h, [tl, tr, br, bl]) {
+  return [
+    `M ${x + tl},${y}`,
+    `L ${x + w - tr},${y} Q ${x + w},${y} ${x + w},${y + tr}`,
+    `L ${x + w},${y + h - br} Q ${x + w},${y + h} ${x + w - br},${y + h}`,
+    `L ${x + bl},${y + h} Q ${x},${y + h} ${x},${y + h - bl}`,
+    `L ${x},${y + tl} Q ${x},${y} ${x + tl},${y} Z`,
+  ].join(' ')
+}
+
+function buildStencil(tiles) {
+  const outer = `M 0,0 H ${SIZE} V ${SIZE} H 0 Z`
+  const holes = tiles.map(t => tilePath(t.x, t.y, t.w, t.h, t.r)).join(' ')
+  return `${outer} ${holes}`
+}
 
 const articles = [
   { id: 1,  title: "India's Varaha bags $20M to scale carbon removal from the Global South",         category: 'News',     date: 'Feb 2026' },
@@ -38,16 +81,18 @@ export default function Spotlight() {
   return (
     <section className="spotlight">
 
-      {/* Left: Image Grid — --img set once here, tiles read via var(--img) */}
-      <div className="sp-grid-wrap" style={{ '--img': `url(${IMG})` }}>
-        <div className="sp-grid">
-          <div className="tile t1 morph" />
-          <div className="tile t2 morph" />
-          <div className="tile t3 morph" />
-          <div className="tile t4 morph" />
-          <div className="tile t5 morph" />
-          <div className="tile t6 morph" />
-          <div className="tile t7 morph" />
+      {/* Left: Image Grid — same stencil approach as HeroSection */}
+      <div className="sp-grid-wrap">
+        <div className="sp-canvas">
+          <img className="sp-canvas-img" src={spotlightImg} alt="" />
+          <svg
+            className="sp-canvas-stencil"
+            viewBox={`0 0 ${SIZE} ${SIZE}`}
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <path fillRule="evenodd" fill="#faf5ee" d={buildStencil(TILES)} />
+          </svg>
         </div>
       </div>
 
