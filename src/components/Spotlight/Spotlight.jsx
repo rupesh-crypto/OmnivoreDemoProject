@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import './Spotlight.css';
 
 const IMG = 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1200&q=80';
@@ -26,21 +26,33 @@ const articles = [
   { id: 20, title: 'Regenerative agriculture: the investment thesis taking root in India',          category: 'Articles', date: 'Aug 2023', active: false },
 ];
 
-// Grid: 3 cols × 195px, gap 12px → total 609px
-const G = 195;
-const GAP = 12;
+function getGridParams() {
+  if (typeof window === 'undefined') return { G: 195, GAP: 12 };
+  const w = window.innerWidth;
+  if (w <= 900) {
+    // Available width = viewport - section horizontal padding (40px total)
+    const available = w - 40;
+    // 3 tiles + 2 gaps; use 8px gap on mobile
+    const gap = 8;
+    const g = Math.max(Math.floor((available - gap * 2) / 3), 72);
+    return { G: g, GAP: gap };
+  }
+  if (w <= 1200) return { G: 155, GAP: 10 };
+  return { G: 195, GAP: 12 };
+}
 
-const tiles = [
-  { id: 't1', col: '1',     row: '1', x: 0,             y: 0,             radius: '50%' },
-  { id: 't2', col: '2 / 4', row: '1', x: G + GAP,       y: 0,             radius: '0 70px 70px 70px' },
-  { id: 't3', col: '1',     row: '2', x: 0,             y: G + GAP,       radius: '70px 0 70px 70px' },
-  { id: 't4', col: '2',     row: '2', x: G + GAP,       y: G + GAP,       radius: '50%' },
-  { id: 't5', col: '3',     row: '2', x: (G + GAP) * 2, y: G + GAP,       radius: '0 70px 70px 70px' },
-  { id: 't6', col: '1 / 3', row: '3', x: 0,             y: (G + GAP) * 2, radius: '70px 0 70px 70px' },
-  { id: 't7', col: '3',     row: '3', x: (G + GAP) * 2, y: (G + GAP) * 2, radius: '0 70px 70px 70px' },
-];
-
-const GRID_SIZE = G * 3 + GAP * 2; // 609px
+function buildTiles(G, GAP) {
+  const r = Math.round(G * 0.36); // proportional corner radius (~70px at G=195)
+  return [
+    { id: 't1', col: '1',     row: '1', x: 0,             y: 0,             radius: '50%' },
+    { id: 't2', col: '2 / 4', row: '1', x: G + GAP,       y: 0,             radius: `0 ${r}px ${r}px ${r}px` },
+    { id: 't3', col: '1',     row: '2', x: 0,             y: G + GAP,       radius: `${r}px 0 ${r}px ${r}px` },
+    { id: 't4', col: '2',     row: '2', x: G + GAP,       y: G + GAP,       radius: '50%' },
+    { id: 't5', col: '3',     row: '2', x: (G + GAP) * 2, y: G + GAP,       radius: `0 ${r}px ${r}px ${r}px` },
+    { id: 't6', col: '1 / 3', row: '3', x: 0,             y: (G + GAP) * 2, radius: `${r}px 0 ${r}px ${r}px` },
+    { id: 't7', col: '3',     row: '3', x: (G + GAP) * 2, y: (G + GAP) * 2, radius: `0 ${r}px ${r}px ${r}px` },
+  ];
+}
 
 function ArticleIcon() {
   return (
@@ -52,11 +64,29 @@ function ArticleIcon() {
 }
 
 export default function Spotlight() {
+  const [{ G, GAP }, setGrid] = useState(getGridParams);
+
+  useEffect(() => {
+    const update = () => setGrid(getGridParams());
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const GRID_SIZE = G * 3 + GAP * 2;
+  const tiles = buildTiles(G, GAP);
+
   return (
     <section className="spotlight">
       {/* Left: Image Grid */}
       <div className="sp-grid-wrap">
-        <div className="sp-grid">
+        <div
+          className="sp-grid"
+          style={{
+            gridTemplateColumns: `${G}px ${G}px ${G}px`,
+            gridTemplateRows: `${G}px ${G}px ${G}px`,
+            gap: `${GAP}px`,
+          }}
+        >
           {tiles.map(t => (
             <div
               key={t.id}

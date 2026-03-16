@@ -290,8 +290,25 @@
   }
 
   .footer-partners {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     padding: 32px 20px;
+    gap: 0;
+  }
+
+  .footer-partner {
+    padding: 24px 16px;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .footer-partner:last-child {
+    border-bottom: none;
+  }
+
+  /* Reset the tablet border overrides */
+  .footer-partner:nth-child(2),
+  .footer-partner:nth-child(3) {
+    border-right: none;
   }
 
   .footer-bottom {
