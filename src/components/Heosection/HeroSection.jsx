@@ -4,19 +4,40 @@ import './HeroSection.css'
 const navLinks = ['Investments', 'Team', 'Impact', 'Spotlight', 'Jobs']
 
 /* ─────────────────────────────────────────────────────────────
-   TILE CONFIG  ←  edit border-radius values here freely
-   r: [top-left, top-right, bottom-right, bottom-left]  (px)
-   Grid is 480×480 | 3 cols × 3 rows | 15px gaps | cell = 150px
+   TILE GRID  —  same 3×3 layout as Spotlight
+   Grid: 480×480 | cell = 150px | gap = 15px
    ───────────────────────────────────────────────────────────── */
-const TILES = [
-  { x: 0,   y: 0,   w: 150, h: 150, r: [75, 75,  0, 75] },   // T1
-  { x: 165, y: 0,   w: 315, h: 150, r: [ 0, 60, 60, 60] },   // T2 — wide (merged T2+T3)
-  { x: 0,   y: 165, w: 150, h: 150, r: [75,  0, 75, 75] },   // T3
-  { x: 165, y: 165, w: 150, h: 150, r: [75, 75, 75, 75] },   // T4 — circle
-  { x: 330, y: 165, w: 150, h: 150, r: [ 0, 75, 75, 75] },   // T5
-  { x: 0,   y: 330, w: 150, h: 150, r: [75, 75,  0, 75] },   // T6
-  { x: 165, y: 330, w: 315, h: 150, r: [ 0, 60, 60, 60] },   // T7 — wide
-]
+const C = 150   // cell size
+const G = 15    // gap
+
+// Grid positions — mirrors Spotlight's .t1 { grid-column / grid-row }
+const POSITIONS = {
+  t1: { x: 0,       y: 0,       w: C,       h: C },  // col 1,        row 1
+  t2: { x: C+G,     y: 0,       w: C*2+G,   h: C },  // col 2/span 2, row 1
+  t3: { x: 0,       y: C+G,     w: C,       h: C },  // col 1,        row 2
+  t4: { x: C+G,     y: C+G,     w: C,       h: C },  // col 2,        row 2
+  t5: { x: C*2+G*2, y: C+G,     w: C,       h: C },  // col 3,        row 2
+  t6: { x: 0,       y: C*2+G*2, w: C,       h: C },  // col 1,        row 3
+  t7: { x: C+G,     y: C*2+G*2, w: C*2+G,   h: C },  // col 2/span 2, row 3
+}
+
+// Morph shapes — mirrors Spotlight's .t1.morph { border-radius }
+// r: [top-left, top-right, bottom-right, bottom-left]  (px)
+const MORPH = {
+  t1: [75, 75,  0, 75],   // circle, cut bottom-right
+  t2: [ 60, 60, 60,0],   // wide, cut top-left
+  t3: [75,  0, 75, 75],   // cut top-right
+  t4: [0, 75, 75, 75],   // full circle
+  t5: [ 75, 75, 0,75],   // cut top-left
+  t6: [75, 75, 75,0],   // circle, cut bottom-right
+  t7: [60, 0,  60, 60],   // wide, cut top-left
+}
+
+// Merge into TILES array consumed by tilePath / buildStencil
+const TILES = Object.keys(POSITIONS).map(id => ({
+  ...POSITIONS[id],
+  r: MORPH[id],
+}))
 
 /**
  * Always emits the same 4× (L + Q) command structure per tile
@@ -95,9 +116,8 @@ export default function HeroSection() {
         {/* Left */}
         <div className="hero-left">
           <h1 className="hero-heading">
-            Supporting{' '}
-            <span className="orange">visionary<br />founders</span>{' '}
-            creating impact<br />
+            Supporting <span className="orange">visionary</span><br />
+            <span className="orange">founders</span> creating impact<br />
             at scale across<br />
             <span className="orange-italic">bharat</span>
           </h1>
