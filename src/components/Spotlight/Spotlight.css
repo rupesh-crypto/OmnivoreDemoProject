@@ -201,6 +201,10 @@
 }
 
 @media (max-width: 480px) {
-  .sp-title        { font-size: 28px; }
-  .sp-article-title { font-size: 15px; }
+  .sp-header        { flex-wrap: wrap; gap: 8px; }
+  .sp-title         { font-size: 26px; width: 100%; }
+  .sp-view-more     { font-size: 15px; }
+  .sp-article       { gap: 12px; padding: 16px 0; }
+  .sp-article-title { font-size: 14px; }
+  .sp-articles      { max-height: 400px; }
 }

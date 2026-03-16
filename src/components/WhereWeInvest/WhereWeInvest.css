@@ -215,9 +215,20 @@
     padding: 24px 20px;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .wwi-investor-text {
-    font-size: 22px;
+    font-size: 20px;
+  }
+
+  .wwi-investor-btn {
+    font-size: 17px;
+    padding: 12px 20px;
+  }
+
+  .wwi-btn-circle {
+    width: 48px;
+    height: 48px;
   }
 }

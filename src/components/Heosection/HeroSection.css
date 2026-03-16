@@ -335,4 +335,8 @@
   .hero-talk-btn  { display: none; }
   .hero-hamburger { display: flex; }
   .grid-canvas    { max-width: 100%; }
+
+  .hero-heading   { font-size: clamp(1.6rem, 6.5vw, 2.2rem); }
+  .hero-pitch-btn { font-size: 17px; padding: 11px 20px; }
+  .btn-circle     { width: 46px; height: 46px; }
 }
