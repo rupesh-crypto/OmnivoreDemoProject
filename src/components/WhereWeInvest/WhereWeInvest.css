@@ -106,22 +106,68 @@
 .wwi-investor-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background-color: #d0cdc6;
   border-radius: 999px;
-  padding: 13px 24px 13px 30px;
-  font-size: 17px;
-  color: #333;
-  text-decoration: none;
+  padding: 14px 28px;
+  font-size: 22px;
   font-weight: 500;
-  border: none;
+  color: #0d3d2c;
+  text-decoration: none;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   white-space: nowrap;
+  transition: color 0.4s ease, transform 0.4s ease;
 }
 
 .wwi-investor-btn:hover {
-  background-color: #c4c0b8;
+  transform: scale(1.06);
+  color: #fff;
+}
+
+/* Circle — fades out on hover */
+.wwi-btn-circle {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #9ab5aa;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.wwi-investor-btn:hover .wwi-btn-circle {
+  opacity: 0;
+}
+
+/* Green fill starts from circle and expands rightward */
+.wwi-investor-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 0;
+  background: #2d6a4f;
+  transition: width 0.4s ease;
+  border-radius: 999px;
+}
+
+.wwi-investor-btn:hover::before {
+  width: calc(100% - 8px);
+}
+
+/* Content above fill */
+.wwi-btn-content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .wwi-investor-btn .arrow {

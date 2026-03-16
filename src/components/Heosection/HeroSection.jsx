@@ -103,6 +103,7 @@ export default function HeroSection() {
           </h1>
 
           <a href="#" className="hero-pitch-btn">
+            <span className="btn-circle" />
             <span className="btn-content">
               Pitch to us
               <span className="btn-arrow">

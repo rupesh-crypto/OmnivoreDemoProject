@@ -19,7 +19,7 @@ function OmnivoreLogoIcon() {
       <ellipse cx="24" cy="19" rx="7" ry="10" fill="#2ec4a0" />
       <ellipse cx="19" cy="19" rx="5" ry="9" fill="#1a9e80" />
     </svg>
-  );
+  );z
 }
 
 function IconX() {

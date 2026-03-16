@@ -12,6 +12,9 @@
 
 /* ── Image Grid ── */
 .sp-grid-wrap {
+  --tile: 195px;
+  --gap: 12px;
+  --r: calc(var(--tile) * 0.36);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -19,15 +22,39 @@
 
 .sp-grid {
   display: grid;
-  grid-template-columns: 195px 195px 195px;
-  grid-template-rows: 195px 195px 195px;
-  gap: 12px;
+  grid-template-columns: repeat(3, var(--tile));
+  grid-template-rows: repeat(3, var(--tile));
+  gap: var(--gap);
 }
 
-.sp-tile {
+/* ── Tile base (shared styles) ── */
+.tile {
+  background-image: var(--img);  /* reads URL set once on .sp-grid-wrap */
+  background-size: calc(var(--tile) * 3 + var(--gap) * 2) calc(var(--tile) * 3 + var(--gap) * 2);
   background-repeat: no-repeat;
-  overflow: hidden;
+  overflow: hidden;              /* clips image to tile shape (border-radius) */
 }
+
+/* ── Grid position + image slice per tile ── */
+/*   background-position shifts the image so each tile shows its correct piece  */
+/*   formula: X = -(col-index × (tile+gap)),  Y = -(row-index × (tile+gap))     */
+
+.t1 { grid-column: 1;          grid-row: 1; background-position: 0                                0; }
+.t2 { grid-column: 2 / span 2; grid-row: 1; background-position: calc(-1*(var(--tile)+var(--gap))) 0; }
+.t3 { grid-column: 1;          grid-row: 2; background-position: 0                                calc(-1*(var(--tile)+var(--gap))); }
+.t4 { grid-column: 2;          grid-row: 2; background-position: calc(-1*(var(--tile)+var(--gap))) calc(-1*(var(--tile)+var(--gap))); }
+.t5 { grid-column: 3;          grid-row: 2; background-position: calc(-2*(var(--tile)+var(--gap))) calc(-1*(var(--tile)+var(--gap))); }
+.t6 { grid-column: 1;          grid-row: 3; background-position: 0                                calc(-2*(var(--tile)+var(--gap))); }
+.t7 { grid-column: 2 / span 2; grid-row: 3; background-position: calc(-1*(var(--tile)+var(--gap))) calc(-2*(var(--tile)+var(--gap))); }
+
+/* ── Morph shapes (border-radius: top-left  top-right  bottom-right  bottom-left) ── */
+.t1.morph { border-radius: 0px  100% 100% 100%; }
+.t2.morph { border-radius: 80px  80px  0px  80px; }
+.t3.morph { border-radius: 100% 100%  0px 100%; }
+.t4.morph { border-radius: 100% 100% 100%  0px; }
+.t5.morph { border-radius: 100%  0px 100% 100%; }
+.t6.morph { border-radius: 100%  0px 100% 100%; }
+.t7.morph { border-radius:  0px  80px  80px  80px; }
 
 /* ── Right Content ── */
 .sp-content {
@@ -173,39 +200,24 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1200px) {
-  .spotlight {
-    padding: 60px 40px;
-    gap: 40px;
-  }
+@media (max-width: 1400px) {
+  .sp-grid { --tile: 165px; }
+}
 
-  .sp-title {
-    font-size: 40px;
-  }
+@media (max-width: 1200px) {
+  .spotlight { padding: 60px 40px; gap: 40px; }
+  .sp-grid   { --tile: 155px; --gap: 10px; }
+  .sp-title  { font-size: 40px; }
 }
 
 @media (max-width: 900px) {
-  .spotlight {
-    grid-template-columns: 1fr;
-    padding: 48px 20px;
-    gap: 40px;
-  }
-
-  .sp-grid-wrap {
-    justify-content: center;
-  }
-
-  .sp-title {
-    font-size: 36px;
-  }
+  .spotlight     { grid-template-columns: 1fr; padding: 48px 20px; gap: 40px; }
+  .sp-grid-wrap  { justify-content: center; }
+  .sp-grid       { --tile: min(130px, calc((100vw - 56px) / 3)); --gap: 8px; }
+  .sp-title      { font-size: 36px; }
 }
 
 @media (max-width: 480px) {
-  .sp-title {
-    font-size: 28px;
-  }
-
-  .sp-article-title {
-    font-size: 15px;
-  }
+  .sp-title        { font-size: 28px; }
+  .sp-article-title { font-size: 15px; }
 }

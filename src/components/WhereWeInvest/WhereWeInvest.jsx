@@ -165,7 +165,10 @@ const WhereWeInvest = () => {
       <div className="wwi-investor-bar">
         <p className="wwi-investor-text">Already an investor with us</p>
         <a href="#investor-login" className="wwi-investor-btn">
-          Investor login <span className="arrow">→</span>
+          <span className="wwi-btn-circle" />
+          <span className="wwi-btn-content">
+            Investor login <span className="arrow">→</span>
+          </span>
         </a>
       </div>
     </section>
