@@ -2,29 +2,45 @@
 
 .our-investments {
   background-color: #0d3d2c;
-  padding: 60px 80px;
+  padding: 80px 80px 80px;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* ── Decorative blobs ── */
 .oi-blobs {
   position: absolute;
-  top: 20px;
-  right: 40px;
+  top: -90px;
+  right: -100px;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 14px;
   pointer-events: none;
   z-index: 0;
 }
 
 .oi-blob {
-  width: 64px;
-  height: 64px;
-  background-color: #0a3325;
-  border-radius: 50%;
+  width: 270px;
+  height: 270px;
+  background-color: #257a54;
 }
+
+/* Top-left tile: sharp corner bottom-right (facing center) */
+.oi-blob:nth-child(1) { border-radius: 50% 50% 0 50%; }
+
+/* Top-right tile: sharp corner bottom-left (facing center) */
+.oi-blob:nth-child(2) { border-radius: 50% 50% 50% 0; }
+
+/* Bottom-left tile: sharp corner top-right (facing center) */
+.oi-blob:nth-child(3) { border-radius: 50% 0 50% 50%; }
+
+/* Bottom-right tile: sharp corner top-left (facing center) */
+.oi-blob:nth-child(4) { border-radius: 0 50% 50% 50%; }
 
 /* ── Top Row ── */
 .oi-top-row {
@@ -38,7 +54,7 @@
 }
 
 .oi-title {
-  font-size: 48px;
+  font-size: 64px;
   font-weight: 700;
   color: #fff;
   margin: 0;
@@ -65,18 +81,20 @@
   opacity: 0.75;
 }
 
-.oi-view-portfolio .arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
+.oi-portfolio-arrow {
+  flex-shrink: 0;
+  transform: scaleX(0.5);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
 }
 
-.oi-view-portfolio:hover .arrow {
-  transform: translateX(3px);
+.oi-view-portfolio:hover .oi-portfolio-arrow {
+  transform: scaleX(1);
 }
 
 /* ── Marquee ── */
 .oi-marquee-wrapper {
-  margin: 60px 0;
+  margin: 0;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -153,8 +171,8 @@
 /* ── Newsletter Bar ── */
 .oi-newsletter-bar {
   background-color: #0a3325;
-  border-radius: 16px;
-  padding: 28px 40px;
+  border-radius: 20px;
+  padding: 40px 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -165,7 +183,7 @@
 }
 
 .oi-newsletter-title {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
   color: #fff;
   margin: 0;
@@ -175,18 +193,18 @@
 .oi-newsletter-form {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex: 0 0 auto;
 }
 
 .oi-newsletter-input {
-  width: 280px;
+  width: 360px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 1);
   color: #fff;
-  font-size: 14px;
-  padding: 8px 0;
+  font-size: 18px;
+  padding: 10px 0;
   outline: none;
   caret-color: #fff;
 }
@@ -197,7 +215,7 @@
 
 .oi-newsletter-arrow {
   color: #fff;
-  font-size: 18px;
+  font-size: 26px;
   cursor: pointer;
   background: none;
   border: none;
@@ -232,7 +250,7 @@
   }
 
   .oi-marquee-wrapper {
-    margin: 40px 0;
+    margin: 0;
   }
 
   .oi-newsletter-bar {
@@ -251,6 +269,12 @@
   }
 
   .oi-blobs {
-    display: none;
+    top: 20px;
+    right: -60px;
+  }
+
+  .oi-blob {
+    width: 140px;
+    height: 140px;
   }
 }

@@ -40,7 +40,10 @@ const OurInvestments = () => {
       <div className="oi-top-row">
         <h2 className="oi-title">Our investments</h2>
         <a href="#portfolio" className="oi-view-portfolio">
-          View Portfolio <span className="arrow">→</span>
+          View Portfolio
+          <svg className="oi-portfolio-arrow" width="40" height="16" viewBox="0 0 52 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 10H46M46 10L37 2M46 10L37 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </a>
       </div>
 
