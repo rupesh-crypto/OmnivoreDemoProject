@@ -95,10 +95,9 @@ export default function HeroSection() {
 
           <a href="#" className="hero-talk-btn">
             <span>Talk to us</span>
-            <span className="talk-arrow">
-              <span className="talk-arrow-line" />
-              <span className="talk-arrow-head" />
-            </span>
+            <svg className="talk-btn-arrow" width="40" height="16" viewBox="0 0 52 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10H46M46 10L37 2M46 10L37 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </a>
         </div>
 

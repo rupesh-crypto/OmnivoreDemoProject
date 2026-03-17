@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 80px;
+  padding: 28px 80px;
 }
 
 .hero-logo {
@@ -23,7 +23,7 @@
 }
 
 .hero-logo span {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
   color: #1a2340;
   letter-spacing: 0.02em;
@@ -46,7 +46,7 @@
 }
 
 .hero-nav-links a {
-  font-size: 17px;
+  font-size: 19px;
   color: #444;
   text-decoration: none;
   transition: color 0.2s;
@@ -60,64 +60,27 @@
 .hero-talk-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  border: 1.5px solid #1b3d30;
+  gap: 16px;
+  border: 2.5px solid #1b3d30;
   border-radius: 999px;
-  padding: 13px 24px 13px 30px;
-  font-size: 17px;
+  padding: 14px 24px;
+  font-size: 16px;
   font-weight: 500;
   color: #1b3d30;
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.35s ease;
   white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.hero-talk-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+.hero-talk-btn:hover {
   background: #1b3d30;
-  width: 0;
-  transition: width 0.35s ease;
+  color: #fff;
 }
 
-.hero-talk-btn:hover::before { width: 100%; }
-.hero-talk-btn:hover         { color: #fff; }
-
-.hero-talk-btn span:first-child {
-  position: relative;
-  z-index: 1;
-}
-
-.talk-arrow {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-}
-
-.talk-arrow-line {
+.talk-btn-arrow {
   display: block;
-  width: 14px;
-  height: 1.5px;
-  background: currentColor;
-  margin-right: -2px;
-  transition: width 0.35s ease;
-}
-
-.talk-arrow-head {
-  display: block;
-  width: 7px;
-  height: 7px;
-  border-top: 1.5px solid currentColor;
-  border-right: 1.5px solid currentColor;
-  transform: rotate(45deg);
   flex-shrink: 0;
 }
-
-.hero-talk-btn:hover .talk-arrow-line { width: 22px; }
 
 .hero-hamburger {
   display: none;
@@ -194,7 +157,7 @@
   transform: scale(1.06);
 }
 
-/* Circle — fades out on hover */
+/* Circle — always visible, ::before fill covers it on hover */
 .btn-circle {
   position: absolute;
   left: 8px;
@@ -205,28 +168,31 @@
   border-radius: 50%;
   background: #9ab5aa;
   z-index: 1;
-  transition: opacity 0.3s ease;
-}
-
-.hero-pitch-btn:hover .btn-circle {
-  opacity: 0;
 }
 
 /* Green fill starts from the circle and expands rightward */
 .hero-pitch-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
   left: 8px;
-  width: 0;
-  background: #2d6a4f;
-  transition: width 0.4s ease;
-  border-radius: 999px;
+  transform: translateY(-50%);
+  width: 62px;
+  height: 62px;
+  background: #9ab5aa;
+  border-radius: 50%;
+  opacity: 0;
+  transition: width 0.45s ease, height 0.45s ease, border-radius 0.45s ease, background 0.45s ease, opacity 0.1s ease 0.44s;
+  z-index: 2;
 }
 
 .hero-pitch-btn:hover::before {
   width: calc(100% - 8px);
+  height: 100%;
+  border-radius: 999px;
+  background: #2d6a4f;
+  opacity: 1;
+  transition: width 0.45s ease, height 0.45s ease, border-radius 0.45s ease, background 0.45s ease, opacity 0.1s ease;
 }
 
 .hero-pitch-btn:hover {
@@ -236,7 +202,7 @@
 /* Content sits above the ::before fill */
 .btn-content {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -328,15 +294,15 @@
 @media (max-width: 768px) {
   .hero-nav       { padding: 16px 20px; }
   .hero-hr        { margin: 0 20px; }
-  .hero-body      { padding: 40px 20px; flex-direction: column; align-items: flex-start; }
-  .hero-left      { max-width: 100%; }
-  .hero-right     { justify-content: center; width: 100%; }
+  .hero-body      { padding: 40px 20px; flex-direction: column; align-items: center; }
+  .hero-left      { max-width: 100%; align-items: center; }
+  .hero-right     { justify-content: center; width: 100%; order: -1; }
   .hero-nav-links { display: none; }
   .hero-talk-btn  { display: none; }
   .hero-hamburger { display: flex; }
   .grid-canvas    { max-width: 100%; }
 
-  .hero-heading   { font-size: clamp(1.6rem, 6.5vw, 2.2rem); }
+  .hero-heading   { font-size: clamp(1.6rem, 6.5vw, 2.2rem); text-align: center; }
   .hero-pitch-btn { font-size: 17px; padding: 11px 20px; }
   .btn-circle     { width: 46px; height: 46px; }
 }
