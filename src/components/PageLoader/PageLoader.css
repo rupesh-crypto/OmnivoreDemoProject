@@ -1,0 +1,97 @@
+/* PageLoader.css */
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #d9cdb8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-loader--exit {
+  background: transparent;
+}
+
+/* ── Tile Grid ── */
+.pl-grid {
+  position: relative;
+  transform: scale(0.32);
+  transform-origin: center center;
+}
+
+@media (min-width: 600px) {
+  .pl-grid { transform: scale(0.42); }
+}
+
+@media (min-width: 900px) {
+  .pl-grid { transform: scale(0.54); }
+}
+
+/* Tiles */
+.pl-tile {
+  position: absolute;
+  border-radius: 0;
+  background: #faf5ee;
+  animation: pl-pulse 1.4s ease-in-out infinite;
+}
+
+.pl-tile:nth-child(1) { animation-delay: 0s; }
+.pl-tile:nth-child(2) { animation-delay: 0.12s; }
+.pl-tile:nth-child(3) { animation-delay: 0.24s; }
+.pl-tile:nth-child(5) { animation-delay: 0.36s; }
+.pl-tile:nth-child(6) { animation-delay: 0.48s; }
+.pl-tile:nth-child(7) { animation-delay: 0.60s; }
+
+@keyframes pl-pulse {
+  0%, 100% { background: #faf5ee; }
+  50%       { background: #ede6d8; }
+}
+
+/* Spinning middle tile */
+.pl-tile--spin {
+  background: #faf5ee;
+  animation: pl-spin 2s linear infinite;
+}
+
+@keyframes pl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Exit animation: rotating tile expands to full screen ── */
+.pl-expanding-tile {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 130px;
+  height: 130px;
+  border-radius: 50% 50% 50% 0;
+  background: #faf5ee;
+  animation:
+    pl-expand 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    pl-spin   2s linear infinite;
+}
+
+@keyframes pl-expand {
+  0% {
+    width: 130px;
+    height: 130px;
+    border-radius: 50% 50% 50% 0;
+    opacity: 1;
+  }
+  30% {
+    border-radius: 0;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% {
+    width: max(100vw, 100vh);
+    height: max(100vw, 100vh);
+    border-radius: 0;
+    opacity: 0;
+  }
+}

@@ -68,7 +68,7 @@ export default function HeroSection() {
   const [morphed, setMorphed] = useState(false)
 
   useEffect(() => {
-    const id = setTimeout(() => setMorphed(true), 1500)
+    const id = setTimeout(() => setMorphed(true), 1600)
     return () => clearTimeout(id)
   }, [])
 

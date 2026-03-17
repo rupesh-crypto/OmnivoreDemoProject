@@ -1,3 +1,4 @@
+import PageLoader from './components/PageLoader/PageLoader'
 import HeroSection from './components/Heosection/HeroSection'
 import WhereWeInvest from './components/WhereWeInvest/WhereWeInvest'
 import OurInvestments from './components/OurInvestments/OurInvestments'
@@ -8,6 +9,7 @@ import Footer from './components/Footer/Footer'
 function App() {
   return (
     <div>
+      <PageLoader />
       <HeroSection />
       <WhereWeInvest />
       <OurInvestments />
