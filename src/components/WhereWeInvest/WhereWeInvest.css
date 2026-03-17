@@ -106,6 +106,7 @@
 .wwi-investor-btn {
   display: inline-flex;
   align-items: center;
+  gap: 16px;
   border-radius: 999px;
   padding: 14px 28px;
   font-size: 22px;
@@ -118,15 +119,14 @@
   background: transparent;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.4s ease, transform 0.4s ease;
+  transition: color 0.4s ease;
 }
 
 .wwi-investor-btn:hover {
-  transform: scale(1.06);
   color: #fff;
 }
 
-/* Circle — fades out on hover */
+/* Circle — always visible, ::before fill covers it on hover */
 .wwi-btn-circle {
   position: absolute;
   left: 8px;
@@ -137,46 +137,57 @@
   border-radius: 50%;
   background: #9ab5aa;
   z-index: 1;
-  transition: opacity 0.3s ease;
 }
 
-.wwi-investor-btn:hover .wwi-btn-circle {
-  opacity: 0;
-}
-
-/* Green fill starts from circle and expands rightward */
+/* Fill starts as circle shape, expands on hover */
 .wwi-investor-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
   left: 8px;
-  width: 0;
-  background: #2d6a4f;
-  transition: width 0.4s ease;
-  border-radius: 999px;
+  transform: translateY(-50%);
+  width: 62px;
+  height: 62px;
+  background: #9ab5aa;
+  border-radius: 50%;
+  opacity: 0;
+  transition: width 0.45s ease, height 0.45s ease, border-radius 0.45s ease, background 0.45s ease, opacity 0.15s ease 0.44s;
+  z-index: 2;
 }
 
 .wwi-investor-btn:hover::before {
   width: calc(100% - 8px);
+  height: 100%;
+  border-radius: 999px;
+  background: #2d6a4f;
+  opacity: 1;
+  transition: width 0.45s ease, height 0.45s ease, border-radius 0.45s ease, background 0.45s ease, opacity 0.1s ease;
 }
 
 /* Content above fill */
 .wwi-btn-content {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
-.wwi-investor-btn .arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
+.wwi-btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.wwi-investor-btn:hover .arrow {
-  transform: translateX(3px);
+.wwi-arrow-svg {
+  flex-shrink: 0;
+  transform: scaleX(0.5);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
+}
+
+.wwi-investor-btn:hover .wwi-arrow-svg {
+  transform: scaleX(1);
 }
 
 /* ── Responsive ── */

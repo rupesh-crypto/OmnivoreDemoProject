@@ -208,34 +208,15 @@
   gap: 10px;
 }
 
-/* CSS arrow — line + chevron head */
-.btn-arrow {
-  display: inline-flex;
-  align-items: center;
-}
-
-.arrow-line {
-  display: block;
-  height: 1.5px;
-  width: 12px;
-  background: currentColor;
-  margin-right: -2px;
-  transform-origin: left center;
-  transition: width 0.4s ease;
-}
-
-.arrow-head {
-  display: block;
-  width: 7px;
-  height: 7px;
-  border-top: 1.5px solid currentColor;
-  border-right: 1.5px solid currentColor;
-  transform: rotate(45deg);
+.btn-arrow-svg {
   flex-shrink: 0;
+  transform: scaleX(0.5);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
 }
 
-.hero-pitch-btn:hover .arrow-line {
-  width: 22px;
+.hero-pitch-btn:hover .btn-arrow-svg {
+  transform: scaleX(1);
 }
 
 /* ── Right — Grid + Video ── */

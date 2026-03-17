@@ -167,7 +167,12 @@ const WhereWeInvest = () => {
         <a href="#investor-login" className="wwi-investor-btn">
           <span className="wwi-btn-circle" />
           <span className="wwi-btn-content">
-            Investor login <span className="arrow">→</span>
+            Investor login
+            <span className="wwi-btn-arrow">
+              <svg className="wwi-arrow-svg" width="40" height="16" viewBox="0 0 52 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 10H46M46 10L37 2M46 10L37 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
           </span>
         </a>
       </div>
