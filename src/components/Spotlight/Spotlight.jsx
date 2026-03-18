@@ -101,7 +101,12 @@ export default function Spotlight() {
         <div className="sp-header">
           <h2 className="sp-title">Spotlight</h2>
           <a href="#spotlight" className="sp-view-more">
-            View more <span className="sp-arrow">→</span>
+            View more
+            <span className="sp-view-arrow">
+              <svg className="sp-view-arrow-svg" width="40" height="16" viewBox="0 0 52 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 10H46M46 10L37 2M46 10L37 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
           </a>
         </div>
 
@@ -117,7 +122,11 @@ export default function Spotlight() {
                   <span className="sp-meta-date">{a.date}</span>
                 </div>
               </div>
-              <span className="sp-article-arrow" />
+              <span className="sp-article-arrow">
+                <svg width="36" height="14" viewBox="0 0 52 20" fill="none">
+                  <path d="M0 10H46M46 10L37 2M46 10L37 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
             </a>
           ))}
         </div>

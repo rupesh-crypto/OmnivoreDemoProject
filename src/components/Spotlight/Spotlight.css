@@ -67,26 +67,27 @@
 .sp-view-more {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 17px;
+  gap: 10px;
+  font-size: 20px;
   color: #0d3d2c;
   text-decoration: none;
   font-weight: 500;
   white-space: nowrap;
-  transition: opacity 0.2s;
 }
 
-.sp-view-more:hover {
-  opacity: 0.65;
+.sp-view-arrow {
+  display: inline-flex;
+  align-items: center;
 }
 
-.sp-arrow {
-  display: inline-block;
-  transition: transform 0.2s;
+.sp-view-arrow-svg {
+  transform: scaleX(0.55);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
 }
 
-.sp-view-more:hover .sp-arrow {
-  transform: translateX(3px);
+.sp-view-more:hover .sp-view-arrow-svg {
+  transform: scaleX(1);
 }
 
 /* ── Articles ── */
@@ -94,7 +95,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 16px;
-  max-height: 560px;
+  max-height: 520px;
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -108,10 +109,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 22px 0;
+  padding: 36px 12px;
   text-decoration: none;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
   transition: background 0.2s;
+}
+
+.sp-article:hover {
+  background: #ede8e0;
 }
 
 .sp-article:last-child {
@@ -129,6 +135,7 @@
   color: #0d3d2c;
   margin: 0 0 10px 0;
   line-height: 1.45;
+  transition: color 0.2s;
 }
 
 .sp-article-meta {
@@ -137,54 +144,59 @@
   gap: 6px;
   font-size: 13px;
   color: #888;
+  transition: color 0.2s;
 }
 
 .sp-meta-icon {
   display: flex;
   align-items: center;
   color: #aaa;
+  transition: color 0.2s;
 }
 
 .sp-meta-category {
   color: #777;
   font-weight: 500;
+  transition: color 0.2s;
 }
 
 .sp-meta-dot {
   color: #bbb;
+  transition: color 0.2s;
 }
 
 .sp-meta-date {
   color: #999;
+  transition: color 0.2s;
 }
 
 /* Arrow: long dash + head */
 .sp-article-arrow {
   display: inline-flex;
   align-items: center;
+  align-self: center;
   flex-shrink: 0;
+  margin-right: 8px;
   color: #bbb;
   transition: color 0.2s, transform 0.2s;
 }
 
-.sp-article-arrow::before {
-  content: '';
-  display: block;
-  width: 18px;
-  height: 1.5px;
-  background: currentColor;
-  margin-right: -3px;
-}
-
-.sp-article-arrow::after {
-  content: '›';
-  font-size: 22px;
-  line-height: 1;
-}
 
 .sp-article:hover .sp-article-arrow {
   transform: translateX(4px);
-  color: #0d3d2c;
+  color: #257a54;
+}
+
+.sp-article:hover .sp-article-title {
+  color: #257a54;
+}
+
+.sp-article:hover .sp-article-meta,
+.sp-article:hover .sp-meta-icon,
+.sp-article:hover .sp-meta-category,
+.sp-article:hover .sp-meta-dot,
+.sp-article:hover .sp-meta-date {
+  color: #4a9e78;
 }
 
 /* ── Responsive ── */
