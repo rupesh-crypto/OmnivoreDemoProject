@@ -105,7 +105,7 @@ export default function Spotlight() {
           </a>
         </div>
 
-        <div className="sp-articles">
+        <div className="sp-articles" data-lenis-prevent>
           {articles.map(a => (
             <a key={a.id} href="#" className="sp-article">
               <div className="sp-article-body">
